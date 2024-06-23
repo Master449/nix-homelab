@@ -1,7 +1,5 @@
 { config, pkgs, ... }:
 {
-  imports = [ ./homepage.nix ];
-
   networking.firewall.allowedTCPPorts = [ 80 443 8096 8082 ];
   
   services.httpd.enable = true;
