@@ -10,8 +10,7 @@ Remember to change their password with smbpasswd -a (no -a if they exist already
 # Plans
 
 ToDo:
-- Setup Alert System for drives (SMART testing?)
-- Setup Jellyfin container
+- Get Dashboard Completed
 
 # Completed
 
@@ -19,3 +18,5 @@ Done:
 - Setup git repo
 - Move /etc/nixos to somewhere where sudo isnt needed
 - Setup Tailscale
+- Setup Alert System for drives (SMART testing?)
+- Setup Jellyfin container
