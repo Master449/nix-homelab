@@ -39,7 +39,7 @@
         "guest ok" = "no";
         "create mask" = "0777";
         "directory mask" = "0777";
-	"valid users" = "media,@samba";
+	"valid users" = "media,jellyfin,@samba";
 	"writeable" = "yes";
       };
       david = {
@@ -62,6 +62,7 @@
     serviceConfig = {
       ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.rsync}/bin/rsync -aq /mnt/WD1/* /mnt/WD2/'";
     };
+    restartIfChanged = false;
   };
  
   # Define the timer for the copy service
@@ -82,6 +83,7 @@
     serviceConfig = {
       ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -t short /dev/sdb && ${pkgs.smartmontools}/bin/smartctl -t short /dev/sdc'";
     };
+    restartIfChanged = false;
   };
 
   systemd.timers.smart-short-timer = {

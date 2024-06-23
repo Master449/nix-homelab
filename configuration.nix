@@ -5,7 +5,8 @@
     [
       ./hardware-configuration.nix
       ./samba.nix
-    ];
+      ./services.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -51,7 +52,7 @@
     david = {
       isNormalUser = true;
       description = "david";
-      extraGroups = [ "networkmanager" "wheel" "samba" ];
+      extraGroups = [ "networkmanager" "wheel" "samba" "docker" ];
       packages = with pkgs; [];
     };
   };
@@ -63,6 +64,7 @@
     kitty
     htop
     git
+    fastfetch
   ];
 
   networking.firewall.enable = true;
