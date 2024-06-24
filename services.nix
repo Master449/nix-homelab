@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  networking.firewall.allowedTCPPorts = [ 80 443 8096 8082 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 8096 3000 ];
   
   services.httpd.enable = true;
   services.httpd.adminAddr = "admin@example.org";
@@ -18,4 +18,5 @@
     enable = true;
   };
 
+  virtualisation.docker.enable = true;
 }

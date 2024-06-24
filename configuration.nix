@@ -61,11 +61,23 @@
 
   environment.systemPackages = with pkgs; [
     neovim
-    kitty
+    ffmpeg-full
+    jellyfin-ffmpeg
     htop
     git
+    nvtopPackages.intel
     fastfetch
+    kitty
   ];
+
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-vaapi-driver
+      libvdpau-va-gl
+    ];
+  };
 
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;

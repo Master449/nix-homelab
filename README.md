@@ -11,6 +11,8 @@ Remember to change their password with smbpasswd -a (no -a if they exist already
 
 ToDo:
 - Get Dashboard Completed
+- Netdata Possibly
+- Speedtest-tracker
 
 # Completed
 
