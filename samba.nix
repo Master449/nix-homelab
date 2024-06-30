@@ -1,11 +1,15 @@
 { config, pkgs, ... }:
 {
 
-  # ---------------- Samba Users --------------------
+  # ---------------- Packages --------------------
   environment.systemPackages = with pkgs; [
     rsync
     smartmontools  # SMART tests and Info
   ];
+
+  # ---------------- Packages --------------------
+  networking.firewall.allowedTCPPorts = [ 139 445 ];
+  networking.firewall.allowedUDPPorts = [ 137 138 ];
 
   # ---------------- Samba Users --------------------
   users.users = {
@@ -18,8 +22,17 @@
       isNormalUser = true;
       description = "Media Vault";
       extraGroups = [ "samba" ];
+
     };
+    time-machine = {
+      isSystemUser = true;
+      group = "time-machine";
+      home = "/mnt/WD1/time-machine";
+    };
+
   };
+   
+   users.groups.time-machine = {};
 
   # ---------------- Samba Config --------------------
   services.samba = {
@@ -29,10 +42,19 @@
     extraConfig = ''
       workgroup = WORKGROUP
       security = user
-      max protocol = smb2
       inherit permission = yes
     '';
     shares = {
+      TimeMachine = {
+        path = "/mnt/WD1/time-machine";
+        "valid users" = "time-machine";
+        public = "no";
+        writeable = "yes";
+        "fruit:aapl" = "yes";
+        "fruit:time machine" = "yes";
+        #"fruit:model" = "N88AP";
+        "vfs objects" = "catia fruit streams_xattr";
+      };
       media = {
         path = "/mnt/WD1/Media";
 	"read only" = "no";
@@ -60,7 +82,7 @@
     description = "Backs up the main drive to the backup with rsync, preserving permissions and only updating if needed.";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.rsync}/bin/rsync -aq /mnt/WD1/* /mnt/WD2/'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.rsync}/bin/rsync -aq /mnt/WD1/* /mnt/WD2/ --delete'";
     };
     restartIfChanged = false;
   };

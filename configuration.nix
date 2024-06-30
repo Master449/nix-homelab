@@ -10,10 +10,10 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.nixPath = [
     "/nix/var/nix/profiles/per-user/root/channels/nixos"
     "nixos-config=/home/david/nix-homelab/configuration.nix"
@@ -42,6 +42,8 @@
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";
+      settings.PasswordAuthentication = false;
+      settings.DenyUsers = [ "test" "media" "time-machine" ];
     };
     tailscale = {
       enable = true;
