@@ -6,12 +6,15 @@
       ./hardware-configuration.nix
       ./samba.nix
       ./services.nix
+      ./firewall.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
+  
+  
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.nixPath = [
@@ -34,27 +37,11 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services = {
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
-    openssh = {
-      enable = true;
-      settings.PermitRootLogin = "no";
-      settings.PasswordAuthentication = false;
-      settings.DenyUsers = [ "test" "media" "time-machine" ];
-    };
-    tailscale = {
-      enable = true;
-    };
-  };
-
   users.users = {
     david = {
       isNormalUser = true;
       description = "david";
-      extraGroups = [ "networkmanager" "wheel" "samba" "docker" ];
+      extraGroups = [ "networkmanager" "wheel" "samba" "docker" "libvirtd" "libvirt" ];
       packages = with pkgs; [];
     };
   };
@@ -70,7 +57,18 @@
     nvtopPackages.intel
     fastfetch
     kitty
+    curl
+    bc
+    figlet
+    fortune
+    lm_sensors
+    libvirt
+    qemu
+    virt-manager
   ];
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   hardware.opengl = {
     enable = true;
@@ -80,11 +78,6 @@
       libvdpau-va-gl
     ];
   };
-
-  networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
-  networking.firewall.allowedTCPPorts = [ 22 445 139 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 ];
 
   system.stateVersion = "24.05"; # Did you read the comment?
 

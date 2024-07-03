@@ -8,8 +8,6 @@
   ];
 
   # ---------------- Packages --------------------
-  networking.firewall.allowedTCPPorts = [ 139 445 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 ];
 
   # ---------------- Samba Users --------------------
   users.users = {
@@ -106,6 +104,7 @@
       ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -t short /dev/sdb && ${pkgs.smartmontools}/bin/smartctl -t short /dev/sdc'";
     };
     restartIfChanged = false;
+    serviceConfig.RemainAfterExit = true;
   };
 
   systemd.timers.smart-short-timer = {
@@ -125,6 +124,8 @@
     serviceConfig = {
       ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -a /dev/sdb > /home/david/sdb_log && ${pkgs.smartmontools}/bin/smartctl -a /dev/sdc > /home/david/sdc_log'";
     };
+    restartIfChanged = false;
+    serviceConfig.RemainAfterExit = true;
   };
 
   systemd.timers.log-smart-short-timer = {
