@@ -8,7 +8,9 @@
     80    # HTTP
     445   # HTTPs
     139   # Samba
+    2375  # Docker Host
     3000  # Homepage
+    7000  # Uptime Kuma
   ];
   
   networking.firewall.allowedUDPPorts = [ 

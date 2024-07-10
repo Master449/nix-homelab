@@ -37,7 +37,7 @@
 #        rpc-enabled = true;
 #        rpc-host-whitelist-enabled = true;
 #        rpc-port = 9091;
-#        rpc-whitelist = "127.0.0.1,::1";
+#        rpc-whitelist = "127.0.0.1,";
 #        rpc-username = "david";
 #        rpc-password = "Some12hold";
 #      };
@@ -68,25 +68,14 @@
     resolved.enable = true;
 
     # No major use yet
-    mysql = {
-      enable = true;
-      package = pkgs.mariadb;
-    };
+    #mysql = {
+    #  enable = true;
+    #  package = pkgs.mariadb;
+    #};
   
     # Jellyfin Media Server
     jellyfin = {
       enable = true;
-    };
-
-    grafana = {
-      enable = true;
-      settings = {
-        server = {
-          http_addr = "127.0.0.1";
-          http_port = 7000;
-          domain = "grafana.homelab.local";
-        };
-      };
     };
 
     # Broadcasts Time Machine Availability
@@ -134,8 +123,8 @@
               };
           };
         };
-        "grafana.homelab.local" = {
-          serverName = "grafana.homelab.local";
+        "uptime.homelab.local" = {
+          serverName = "uptime.homelab.local";
           
           locations = {
             "/" = {
@@ -149,26 +138,29 @@
             };
           };
         };
-#        "torrents.homelab.local" = {
-#          serverName = "torrents.homelab.local";
-#
-#          locations = {
-#              "/" = {
-#                proxyPass = "http://localhost:9091";
-#                extraConfig = ''
-#                  proxy_set_header Host $host;
-#                  proxy_set_header X-Real-IP $remote_addr;
-#                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-#                  proxy_set_header X-Forwarded-Proto $scheme;
-#                '';
-#              };
-#          };
-#        };
+        "torrents.homelab.local" = {
+          serverName = "torrents.homelab.local";
+
+          locations = {
+              "/" = {
+                proxyPass = "http://localhost:9091";
+                extraConfig = ''
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_set_header X-Forwarded-Proto $scheme;
+                '';
+              };
+          };
+        };
       };
       recommendedGzipSettings = true;
     };
   };
   
   # Docker
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    listenOptions = [ "2375" ];
+  };
 }

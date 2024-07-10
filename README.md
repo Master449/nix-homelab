@@ -10,8 +10,13 @@ Remember to change their password with smbpasswd -a (no -a if they exist already
 # Plans
 
 ToDo:
+- Gittea Server
 - Netdata Possibly
 - Speedtest-tracker
+- Nextcloud
+
+Long-term
+- Active Directory (Need more RAM for VMs)
 
 # Completed
 
@@ -23,3 +28,4 @@ Done:
 - Setup Jellyfin container
 - Get Dashboard Completed
 - nginx reverse proxy
+- Uptime-kuma
