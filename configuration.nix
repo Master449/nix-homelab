@@ -42,6 +42,7 @@
       isNormalUser = true;
       description = "david";
       extraGroups = [ "networkmanager" "wheel" "samba" "docker" "libvirtd" "libvirt" ];
+      shell = pkgs.zsh;
       packages = with pkgs; [];
     };
   };
@@ -68,6 +69,8 @@
     nodejs_22
     nodePackages_latest.npm
   ];
+
+  programs.zsh.enable = true;
 
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
