@@ -16,7 +16,7 @@ ToDo:
 - Nextcloud
 
 Long-term
-- Active Directory (Need more RAM for VMs)
+- Active Directory
 
 # Completed
 
