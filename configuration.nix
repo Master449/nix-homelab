@@ -7,14 +7,14 @@
       ./samba.nix
       ./services.nix
       ./firewall.nix
+      ./systemd.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
   networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true;
-  
-  
+  networking.networkmanager.enable = true;  
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.nixPath = [
@@ -65,6 +65,8 @@
     libvirt
     qemu
     virt-manager
+    nodejs_22
+    nodePackages_latest.npm
   ];
 
   virtualisation.libvirtd.enable = true;

@@ -6,7 +6,7 @@
   networking.firewall.allowedTCPPorts = [ 
     22    # SSH
     80    # HTTP
-    445   # HTTPs
+    443   # HTTPs
     139   # Samba
     2375  # Docker Host
     3000  # Homepage

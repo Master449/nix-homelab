@@ -12,11 +12,19 @@
 #  ];
 
 #  environment.systemPackages = with pkgs; [ qbittorrent-nox ];
- 
+
+  users.users.nginx.extraGroups = [ "acme" ];
+
   # Used by nginx, might SSL later down the line
   security.acme = {
     acceptTerms = true;
     defaults.email = "master4491@gmail.com";
+    certs."jellyfin-flowers-1942130.duckdns.org" = {
+      dnsProvider = "duckdns";
+      webroot = null;
+      group = "nginx";
+      environmentFile = "/home/david/.secrets";
+    };
   };
 
   services = {
@@ -107,7 +115,15 @@
             };
           };
         };
-
+        "jellyfin-flowers-1942130.duckdns.org" = {
+          useACMEHost = "jellyfin-flowers-1942130.duckdns.org";
+          forceSSL = true; 
+          locations = {
+            "/" = {
+              proxyPass = "http://localhost:8096";
+            };
+          };
+        };
         "homepage.homelab.local" = {
           serverName = "homepage.homelab.local";
 

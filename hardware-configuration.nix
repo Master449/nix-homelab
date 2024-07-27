@@ -6,6 +6,7 @@
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
+      ./disks.nix
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -14,37 +15,19 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a5c8d3e2-1cbe-4ff0-afdd-f00b677414e0";
+    { device = "/dev/disk/by-uuid/a9ec6a92-2fac-4b6f-a5bf-e47573125643";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/DF00-2FF1";
+    { device = "/dev/disk/by-uuid/3D32-78A3";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/mnt/WD1" = 
-    { device = "/dev/disk/by-uuid/5dab6e68-c75f-4d09-9472-6ffb8df4ee93";
-      fsType = "ext4";
-    };
-  
-  fileSystems."/mnt/WD2" = 
-    { device = "/dev/disk/by-uuid/f64b104f-9553-4081-a48a-30c3af6b815a";
-      fsType = "ext4";
-    };
-
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   swapDevices = [ ];
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eno2.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
