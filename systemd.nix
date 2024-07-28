@@ -1,6 +1,16 @@
 { config, pkgs, ... }: 
 {
   
+  # ---------------- Glances --------------------
+  systemd.services.flances-server = {
+    description = "runs the glances api with no web ui";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.glances}/bin/glances -w --disable-webui'";
+    };
+    restartIfChanged = false;
+  };
+
   # ---------------- Reolink Aggregator API --------------------
   systemd.services.express-server = {
     description = "runs the reolink API aggregator express server";

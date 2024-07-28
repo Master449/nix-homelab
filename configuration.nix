@@ -14,7 +14,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true;  
+  networking.networkmanager.enable = true;
+  networking.nameservers = [ "192.168.5.205" ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.nixPath = [
@@ -68,6 +69,7 @@
     virt-manager
     nodejs_22
     nodePackages_latest.npm
+    glances
   ];
 
   programs.zsh.enable = true;

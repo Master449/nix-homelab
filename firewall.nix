@@ -10,7 +10,9 @@
     139   # Samba
     2375  # Docker Host
     3000  # Homepage
+    4000  # Speedtest Tracker
     7000  # Uptime Kuma
+    61208 # Glances
   ];
   
   networking.firewall.allowedUDPPorts = [ 

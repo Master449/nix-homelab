@@ -29,27 +29,6 @@
 
   services = {
     
-    # Transmission BitTorrent Client
-#    transmission = {
-#      enable = true;
-#      settings = {
-#        bind-address-ipv4 = "0.0.0.0";
-#        download-dir = "/mnt/WD1/torrent";
-#        encryption = 1;
-#        peer-port = 6881;
-#        peer-port-random-high = 65535;
-#        peer-port-random-low = 49152;
-#        peer-port-random-on-start = false;
-#        rpc-authentication-required = true;
-#        rpc-bind-address = "0.0.0.0";
-#        rpc-enabled = true;
-#        rpc-host-whitelist-enabled = true;
-#        rpc-port = 9091;
-#        rpc-whitelist = "127.0.0.1,";
-#        rpc-username = "david";
-#        rpc-password = "Some12hold";
-#      };
-#    };
     # xserver
     xserver.xkb = {
       layout = "us";
@@ -154,12 +133,12 @@
             };
           };
         };
-        "torrents.homelab.local" = {
-          serverName = "torrents.homelab.local";
+        "speedtest.homelab.local" = {
+          serverName = "speedtest.homelab.local";
 
           locations = {
               "/" = {
-                proxyPass = "http://localhost:9091";
+                proxyPass = "http://localhost:4000";
                 extraConfig = ''
                   proxy_set_header Host $host;
                   proxy_set_header X-Real-IP $remote_addr;
