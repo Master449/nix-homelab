@@ -1,24 +1,16 @@
 # NixOS Homelab
 
-Current runs a samba server, and some custom systemd units to take care of backups and SMART tests.
-
-Just some stuff I need to remember:
-
-Users need a nixos user account
-Remember to change their password with smbpasswd -a (no -a if they exist already)
-
-# Plans
+## Plans
 
 ToDo:
 - Gittea Server
-- Netdata Possibly
-- Speedtest-tracker
+- Netdata
 - Nextcloud
 
 Long-term
 - Active Directory
 
-# Completed
+## Completed
 
 Done:
 - Setup git repo
@@ -29,3 +21,4 @@ Done:
 - Get Dashboard Completed
 - nginx reverse proxy
 - Uptime-kuma
+- Speedtest-tracker
