@@ -12,6 +12,7 @@
     3000  # Homepage
     4000  # Speedtest Tracker
     7000  # Uptime Kuma
+    8096  # Jellyfin
     61208 # Glances
   ];
   

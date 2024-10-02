@@ -12,10 +12,11 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "ntfs" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "chronos"; # Define your hostname.
   networking.networkmanager.enable = true;
-  networking.nameservers = [ "192.168.5.205" ];
+  networking.nameservers = [ "192.168.0.127" ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.nixPath = [
@@ -56,7 +57,7 @@
     jellyfin-ffmpeg
     htop
     git
-    nvtopPackages.intel
+    nvtopPackages.nvidia
     fastfetch
     kitty
     curl
@@ -77,14 +78,21 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      intel-vaapi-driver
-      libvdpau-va-gl
-    ];
+  # Specific for NVIDIA proprietary drivers
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware = {
+    opengl.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
   };
+  # -----------------------------------------
 
   system.stateVersion = "24.05"; # Did you read the comment?
 

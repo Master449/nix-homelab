@@ -47,7 +47,7 @@
     description = "Run a short SMART test on the drives.";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -t short /dev/sdb && ${pkgs.smartmontools}/bin/smartctl -t short /dev/sdc'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -t short /dev/sda && ${pkgs.smartmontools}/bin/smartctl -t short /dev/sdb'";
     };
     restartIfChanged = false;
     serviceConfig.RemainAfterExit = true;
@@ -68,7 +68,7 @@
     description = "Log the SMART tests";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -a /dev/sdb > /home/david/sdb_log && ${pkgs.smartmontools}/bin/smartctl -a /dev/sdc > /home/david/sdc_log'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -a /dev/sda > /home/david/sda_log && ${pkgs.smartmontools}/bin/smartctl -a /dev/sdb > /home/david/sdb_log'";
     };
     restartIfChanged = false;
     serviceConfig.RemainAfterExit = true;
