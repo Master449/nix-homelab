@@ -13,19 +13,19 @@
 
 #  environment.systemPackages = with pkgs; [ qbittorrent-nox ];
 
-  users.users.nginx.extraGroups = [ "acme" ];
+  #users.users.nginx.extraGroups = [ "acme" ];
 
   # Used by nginx, might SSL later down the line
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "master4491@gmail.com";
-    certs."jellyfin-flowers-1942130.duckdns.org" = {
-      dnsProvider = "duckdns";
-      webroot = null;
-      group = "nginx";
-      environmentFile = "/home/david/.secrets";
-    };
-  };
+  #security.acme = {
+  #  acceptTerms = true;
+  #  defaults.email = "master4491@gmail.com";
+  #  certs."jellyfin-flowers-1942130.duckdns.org" = {
+  #    dnsProvider = "duckdns";
+  #    webroot = null;
+  #    group = "nginx";
+  #    environmentFile = "/home/david/.secrets";
+  #  };
+  #};
 
   services = {
     
@@ -51,8 +51,8 @@
     };
     
     # Mullvad  VPN
-    mullvad-vpn.enable = true;
-    resolved.enable = true;
+    #mullvad-vpn.enable = true;
+    #resolved.enable = true;
 
     # No major use yet
     #mysql = {
@@ -75,8 +75,8 @@
     };
     
     # Reverse Proxy
-    nginx = {
-      enable = true;
+   nginx = {
+      enable = false;
 
       virtualHosts = {
         "jellyfin.homelab.local" = {

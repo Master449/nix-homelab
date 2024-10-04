@@ -22,7 +22,7 @@
   };
  
   # ---------------- Samba Backup unit --------------------
-  systemd.services.samba-backup = {
+  systemd.services.backup = {
     description = "Backs up the main drive to the backup with rsync, preserving permissions and only updating if needed.";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
@@ -31,8 +31,8 @@
     restartIfChanged = false;
   };
  
-  # Define the timer for the copy service
-  systemd.timers.samba-backup-timer = {
+  # Define the timer for the backup service
+  systemd.timers.backup-timer = {
     description = "Run the Samba Backup service daily at 2AM";
     wantedBy = [ "timers.target" ];
     timerConfig = {
@@ -42,45 +42,12 @@
     };
   };
 
-  # ---------------- SMART Test unit --------------------
-  systemd.services.smart-short-test = {
-    description = "Run a short SMART test on the drives.";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -t short /dev/sda && ${pkgs.smartmontools}/bin/smartctl -t short /dev/sdb'";
-    };
-    restartIfChanged = false;
-    serviceConfig.RemainAfterExit = true;
-  };
-
-  systemd.timers.smart-short-timer = {
-    description = "Run SMART Short tests once a week";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "Mon *-*-* 03:00:00";
-      Persistent = true;
-      Unit = "smart-short-test.service";
-    };
-  };
-  
-  # ---------------- Log SMART Test unit --------------------
-  systemd.services.log-smart-short-test = {
-    description = "Log the SMART tests";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.smartmontools}/bin/smartctl -a /dev/sda > /home/david/sda_log && ${pkgs.smartmontools}/bin/smartctl -a /dev/sdb > /home/david/sdb_log'";
-    };
-    restartIfChanged = false;
-    serviceConfig.RemainAfterExit = true;
-  };
-
-  systemd.timers.log-smart-short-timer = {
-    description = "Run SMART Short tests once a week";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "Mon *-*-* 04:00:00";
-      Persistent = true;
-      Unit = "log-smart-short-test.service";
-    };
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+        "0 0 * * *      root    /home/david/nix-homelab/daily-maintenance.sh"
+        "0 2 * * 0      root    /home/david/nix-homelab/weekly-maintenance.sh"
+        "0 5 1 * *      root    /home/david/nix-homelab/monthly-maintenance.sh"
+    ];
   };
 }
