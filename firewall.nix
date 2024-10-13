@@ -11,8 +11,11 @@
     2375  # Docker Host
     3000  # Homepage
     4000  # Speedtest Tracker
+    5000  # NUT (UPS) Server
     7000  # Uptime Kuma
+    8100  # BlueMap Minecraft
     8096  # Jellyfin
+    25565 # Minecraft
     61208 # Glances
   ];
   

@@ -8,6 +8,7 @@
       ./services.nix
       ./firewall.nix
       ./systemd.nix
+      ./ups.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -43,7 +44,7 @@
     david = {
       isNormalUser = true;
       description = "david";
-      extraGroups = [ "networkmanager" "wheel" "samba" "docker" "libvirtd" "libvirt" ];
+      extraGroups = [ "networkmanager" "wheel" "samba" "docker" "libvirtd" "libvirt" "kvm" ];
       shell = pkgs.zsh;
       packages = with pkgs; [];
     };
@@ -64,9 +65,13 @@
     bc
     figlet
     fortune
-    lm_sensors
     libvirt
+    lm_sensors
+    nut
+    pciutils
     qemu
+    temurin-jre-bin-21
+    usbutils
     virt-manager
     nodejs_22
     nodePackages_latest.npm
@@ -80,7 +85,11 @@
 
   # Specific for NVIDIA proprietary drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-
+  services.xserver = {
+    enable = true;
+    displayManager.lightdm.enable = true;
+    desktopManager.cinnamon.enable = true;
+  };
   hardware = {
     opengl.enable = true;
     nvidia = {
