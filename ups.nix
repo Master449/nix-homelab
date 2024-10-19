@@ -9,6 +9,9 @@
     ups."GX1500U" = {
       driver = "usbhid-ups";
       port = "auto";
+      #      directives = [
+      #  "ups.beeper.status = disabled"
+      #];
     };
 
     # User to manage
@@ -20,12 +23,12 @@
     upsmon.monitor."GX1500U".user = "upsmon";
 
     # NUT Server for client devices
-    #upsd = {
-    #  enable = true;
-    #  listen = [{
-    #    address = "";
-    #    port = ;
-    #  }];
-    #};
+    upsd = {
+      enable = true;
+      listen = [{
+        address = "192.168.0.109";
+        port = 5000;
+      }];
+    };
   };
 }

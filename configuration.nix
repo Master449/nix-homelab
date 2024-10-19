@@ -85,17 +85,14 @@
 
   # Specific for NVIDIA proprietary drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  services.xserver = {
-    enable = true;
-    displayManager.lightdm.enable = true;
-    desktopManager.cinnamon.enable = true;
-  };
+
   hardware = {
     opengl.enable = true;
     nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
+      nvidiaPersistenced = true;
       open = false;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;

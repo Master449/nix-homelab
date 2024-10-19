@@ -56,82 +56,19 @@
     };
     
     # Reverse Proxy
-    #nginx = {
-    #  enable = false;
-    #
-    #  virtualHosts = {
-    #    "jellyfin.homelab.local" = {
-    #      serverName = "jellyfin.homelab.local";
-    #      
-    #      locations = {
-    #        "/" = {
-    #          proxyPass = "http://localhost:8096";
-    #          extraConfig = ''
-    #            proxy_set_header Host $host;
-    #            proxy_set_header X-Real-IP $remote_addr;
-    #            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    #            proxy_set_header X-Forwarded-Proto $scheme;
-    #          '';
-    #        };
-    #      };
-    #    };
-    #    "jellyfin-flowers-1942130.duckdns.org" = {
-    #      useACMEHost = "jellyfin-flowers-1942130.duckdns.org";
-    #      forceSSL = true; 
-    #      locations = {
-    #        "/" = {
-    #          proxyPass = "http://localhost:8096";
-    #        };
-    #      };
-    #    };
-    #    "homepage.homelab.local" = {
-    #      serverName = "homepage.homelab.local";
-    #
-    #      locations = {
-    #          "/" = {
-    #            proxyPass = "http://localhost:3000";
-    #            extraConfig = ''
-    #              proxy_set_header Host $host;
-    #              proxy_set_header X-Real-IP $remote_addr;
-    #              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    #              proxy_set_header X-Forwarded-Proto $scheme;
-    #            '';
-    #          };
-    #      };
-    #    };
-    #    "uptime.homelab.local" = {
-    #      serverName = "uptime.homelab.local";
-    #      
-    #      locations = {
-    #        "/" = {
-    #          proxyPass = "http://localhost:7000";
-    #          extraConfig = ''
-    #            proxy_set_header Host $host;
-    #            proxy_set_header X-Real-IP $remote_addr;
-    #            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    #            proxy_set_header X-Forwarded-Proto $scheme;
-    #          '';
-    #        };
-    #      };
-    #    };
-    #    "speedtest.homelab.local" = {
-    #      serverName = "speedtest.homelab.local";
-    #
-    #      locations = {
-    #          "/" = {
-    #            proxyPass = "http://localhost:4000";
-    #            extraConfig = ''
-    #              proxy_set_header Host $host;
-    #              proxy_set_header X-Real-IP $remote_addr;
-    #              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    #              proxy_set_header X-Forwarded-Proto $scheme;
-    #            '';
-    #          };
-    #      };
-    #    };
-    #  };
-    #  recommendedGzipSettings = true;
-    #};
+    nginx = {
+      enable = true;
+    
+      virtualHosts = {
+        "homepage.home".locations."/".proxyPass = "http://localhost:3000";
+        "jellyfin.home".locations."/".proxyPass = "http://localhost:8096";
+        "torrents.home".locations."/".proxyPass = "http://localhost:9091";
+        "uptime.home".locations."/".proxyPass = "http://localhost:7000";
+        "bluemap.home".locations."/".proxyPass = "http://localhost:8100";
+        "mc.home".locations."/".proxyPass = "http://localhost:25565";
+      };
+      recommendedGzipSettings = true;
+    };
   };
   
   # Docker
