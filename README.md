@@ -22,3 +22,7 @@ Done:
 - nginx reverse proxy
 - Uptime-kuma
 - Speedtest-tracker
+- UPS NUT Monitoring
+- Minecraft Server
+- Bluemap Server
+- Transmission Web Client
