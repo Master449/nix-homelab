@@ -45,9 +45,9 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-        "0 0 * * *      root    /home/david/nix-homelab/daily-maintenance.sh"
-        "0 2 * * 0      root    /home/david/nix-homelab/weekly-maintenance.sh"
-        "0 5 1 * *      root    /home/david/nix-homelab/monthly-maintenance.sh"
+        "0 0 * * *      root    /home/david/nix-homelab/scripts/daily-maintenance.sh"
+        "0 2 * * 0      root    /home/david/nix-homelab/scripts/weekly-maintenance.sh"
+        "0 5 1 * *      root    /home/david/nix-homelab/scripts/monthly-maintenance.sh"
     ];
   };
 }
