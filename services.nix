@@ -1,19 +1,5 @@
 { config, pkgs, ... }:
 {
-  #users.users.nginx.extraGroups = [ "acme" ];
-
-  # Used by nginx, might SSL later down the line
-  #security.acme = {
-  #  acceptTerms = true;
-  #  defaults.email = "master4491@gmail.com";
-  #  certs."jellyfin-flowers-1942130.duckdns.org" = {
-  #    dnsProvider = "duckdns";
-  #    webroot = null;
-  #    group = "nginx";
-  #    environmentFile = "/home/david/.secrets";
-  #  };
-  #};
-
   services = {
     
     # xserver
@@ -25,7 +11,7 @@
     # SSH
     openssh = {
       enable = true;
-      #settings.PermitRootLogin = "no";
+      settings.PermitRootLogin = "no";
       settings.PasswordAuthentication = false;
       settings.DenyUsers = [ "test" "media" "time-machine" ];
       settings.LoginGraceTime = 0;
@@ -36,10 +22,6 @@
     tailscale = {
       enable = true;
     };
-    
-    # Mullvad  VPN
-    #mullvad-vpn.enable = true;
-    #resolved.enable = true;
 
     # Jellyfin Media Server
     jellyfin = {
@@ -58,7 +40,6 @@
     # Reverse Proxy
     nginx = {
       enable = true;
-    
       virtualHosts = {
         "homepage.home".locations."/".proxyPass = "http://localhost:3000";
         "jellyfin.home".locations."/".proxyPass = "http://localhost:8096";
