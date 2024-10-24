@@ -44,7 +44,7 @@
     david = {
       isNormalUser = true;
       description = "david";
-      extraGroups = [ "networkmanager" "wheel" "samba" "docker" "libvirtd" "libvirt" "kvm" ];
+      extraGroups = [ "wheel" "admin" "networkmanager" "samba" "docker" "libvirtd" "libvirt" "kvm" ];
       shell = pkgs.zsh;
       packages = with pkgs; [];
     };

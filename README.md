@@ -6,6 +6,7 @@ ToDo:
 - Gittea Server
 - Netdata
 - Nextcloud
+- File Browser
 
 Long-term
 - Active Directory

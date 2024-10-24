@@ -43,23 +43,22 @@
       inherit permission = yes
     '';
     shares = {
-      TimeMachine = {
-        path = "/mnt/WD1/time-machine";
-        "valid users" = "time-machine";
-        public = "no";
-        writeable = "yes";
-        "fruit:aapl" = "yes";
-        "fruit:time machine" = "yes";
-        #"fruit:model" = "N88AP";
-        "vfs objects" = "catia fruit streams_xattr";
-      };
+      #TimeMachine = {
+      #  path = "/mnt/WD1/time-machine";
+      #  "valid users" = "time-machine";
+      #  public = "no";
+      #  writeable = "yes";
+      #  "fruit:aapl" = "yes";
+      #  "fruit:time machine" = "yes";
+      #  "vfs objects" = "catia fruit streams_xattr";
+      #};
       media = {
         path = "/mnt/WD1/Media";
 	"read only" = "no";
         "guest ok" = "no";
         "create mask" = "0777";
         "directory mask" = "0777";
-	"valid users" = "media,jellyfin,@samba";
+	"valid users" = "jellyfin,@admin,@samba";
 	"writeable" = "yes";
       };
       david = {
@@ -68,7 +67,7 @@
         "guest ok" = "no";
         "create mask" = "0777";
         "directory mask" = "0777";
-	"valid users" = "david,@samba";
+	"valid users" = "david,@admin,@samba";
 	"writeable" = "yes";
       };
       
