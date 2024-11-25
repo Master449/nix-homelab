@@ -1,3 +1,7 @@
+# Archived Status
+
+I have refactored [my original configuration](https://github.com/Master449/nixos-config) to use flakes and become more modular, though work still needs to be done. That means this homelab can be put together with modules in the main config repository.
+
 # NixOS Homelab
 
 ## Plans
