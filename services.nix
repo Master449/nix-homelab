@@ -1,5 +1,18 @@
 { config, pkgs, ... }:
 {
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "master4491@gmail.com";
+
+    certs."flowers-datacenter.com" = {
+      domain = "flowers-datacenter.com";
+      extraDomainNames = ["*.flowers-datacenter.com"];
+      dnsProvider = "cloudflare";
+      dnsPropagationCheck = true;
+      credentialsFile = /home/david/cloudflare.secret;
+    };
+  };
+
   services = {
     
     # xserver
@@ -41,18 +54,38 @@
     nginx = {
       enable = true;
       virtualHosts = {
-        "homepage.home".locations."/".proxyPass = "http://192.168.0.109:3000";
-        "jellyfin.home".locations."/".proxyPass = "http://192.168.0.109:8096";
-        "torrents.home".locations."/".proxyPass = "http://192.168.0.109:8080";
-        "uptime.home".locations."/".proxyPass = "http://192.168.0.109:7000";
-        "bluemap.home".locations."/".proxyPass = "http://192.168.0.109:8100";
-        "mc.home".locations."/".proxyPass = "http://192.168.0.109:25565";
-        "speedtest.home".locations."/".proxyPass = "http://192.168.0.109:4000";
+        "homepage.flowers-datacenter.home" = {
+          locations."/".proxyPass = "http://192.168.1.109:3000";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+        };
+        "jellyfin.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:8096";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+        };
+        "torrents.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:8080";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+        };
+        "speedtest.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:4000";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+        };
+        "homepage.home".locations."/".proxyPass = "http://192.168.1.109:3000";
+        "jellyfin.home".locations."/".proxyPass = "http://192.168.1.109:8096";
+        "uptime.home".locations."/".proxyPass = "http://192.168.1.109:7000";
+        "bluemap.home".locations."/".proxyPass = "http://192.168.1.109:8100";
+        "mc.home".locations."/".proxyPass = "http://192.168.1.109:25565";
       };
       recommendedGzipSettings = true;
     };
 
   };
+
+  users.users.nginx.extraGroups = [ "acme" ];
   
   # Docker
   virtualisation.docker = {
