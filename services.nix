@@ -58,21 +58,45 @@
           locations."/".proxyPass = "http://192.168.1.109:3000";
           useACMEHost = "flowers-datacenter.com";
           forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
         };
         "jellyfin.flowers-datacenter.com" = {
           locations."/".proxyPass = "http://192.168.1.109:8096";
           useACMEHost = "flowers-datacenter.com";
           forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
         };
         "torrents.flowers-datacenter.com" = {
           locations."/".proxyPass = "http://192.168.1.109:8080";
           useACMEHost = "flowers-datacenter.com";
           forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
         };
         "speedtest.flowers-datacenter.com" = {
           locations."/".proxyPass = "http://192.168.1.109:4000";
           useACMEHost = "flowers-datacenter.com";
           forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
         };
         "homepage.home".locations."/".proxyPass = "http://192.168.1.109:3000";
         "jellyfin.home".locations."/".proxyPass = "http://192.168.1.109:8096";
