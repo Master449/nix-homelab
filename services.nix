@@ -21,6 +21,10 @@
       variant = "";
     };
     
+    # Ollama
+    ollama.enable = true;
+    ollama.acceleration = "cuda";
+
     # SSH
     openssh = {
       enable = true;
@@ -54,7 +58,7 @@
     nginx = {
       enable = true;
       virtualHosts = {
-        "homepage.flowers-datacenter.home" = {
+        "homepage.flowers-datacenter.com" = {
           locations."/".proxyPass = "http://192.168.1.109:3000";
           useACMEHost = "flowers-datacenter.com";
           forceSSL = true;
@@ -77,7 +81,10 @@
           '';
         };
         "torrents.flowers-datacenter.com" = {
-          locations."/".proxyPass = "http://192.168.1.109:8080";
+          locations = {
+            "/".proxyPass = "http://192.168.1.109:8080";
+            "/radarr".proxyPass = "http://192.168.1.109:7878";
+          };
           useACMEHost = "flowers-datacenter.com";
           forceSSL = true;
           extraConfig = ''
@@ -89,6 +96,61 @@
         };
         "speedtest.flowers-datacenter.com" = {
           locations."/".proxyPass = "http://192.168.1.109:4000";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
+        };
+        "files.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:7920";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
+        };
+        "sync.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:8384";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
+        };
+        "filebot.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:5800";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
+        };
+        "bezsel.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:8090";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
+        };
+        "notes.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:3001";
           useACMEHost = "flowers-datacenter.com";
           forceSSL = true;
           extraConfig = ''

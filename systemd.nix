@@ -38,7 +38,28 @@
     timerConfig = {
       OnCalendar = "02:00:00";
       Persistent = true;
-      Unit = "samba-backup.service";
+      Unit = "backup.service";
+    };
+  };
+
+  # ---------------- Docker Backup unit --------------------
+  systemd.services.docker-backup = {
+    description = "Backs up docker containers to the backup with rsync, preserving permissions and only updating if needed.";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.rsync}/bin/rsync -aq /home/david/docker/* /mnt/WD1/docker-backup --delete'";
+    };
+    restartIfChanged = false;
+  };
+ 
+  # Define the timer for the backup service
+  systemd.timers.docker-backup-timer = {
+    description = "Run the Docker Backup service daily at 3AM";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "03:00:00";
+      Persistent = true;
+      Unit = "docker-backup.service";
     };
   };
 
@@ -48,6 +69,7 @@
         "0 0 * * *      root    /home/david/nix-homelab/scripts/daily-maintenance.sh"
         "0 2 * * 0      root    /home/david/nix-homelab/scripts/weekly-maintenance.sh"
         "0 5 1 * *      root    /home/david/nix-homelab/scripts/monthly-maintenance.sh"
+        "0 0 * * 0      root    /home/david/nix-homelab/scripts/automatic-backups.sh /mnt/WD1/syncthing/st-sync/syncthing/ /mnt/WD1/Media/Backups/syncthing-backups"
     ];
   };
 }

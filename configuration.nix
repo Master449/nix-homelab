@@ -53,6 +53,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    ollama
     neovim
     ffmpeg-full
     jellyfin-ffmpeg

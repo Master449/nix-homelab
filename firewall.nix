@@ -10,15 +10,21 @@
     139   # Samba
     2375  # Docker Host
     3000  # Homepage
+    3001  # SilverBullet
     3031  # Testing
     4000  # Speedtest Tracker
     5000  # NUT (UPS) Server
+    5050  #Jellyplist
+    5800  # Filebot
     6001  # PeaNUT Dashboard
     7000  # Uptime Kuma
     8100  # BlueMap Minecraft
+    8384  # Syncthing
+    8090  # Beszel
     8096  # Jellyfin
     9091  # Transmission
     25565 # Minecraft
+    45876 # Geszel Agent
     61208 # Glances
   ];
   

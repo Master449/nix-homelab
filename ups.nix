@@ -26,7 +26,7 @@
     upsd = {
       enable = true;
       listen = [{
-        address = "192.168.0.109";
+        address = "192.168.1.109";
         port = 5000;
       }];
     };
