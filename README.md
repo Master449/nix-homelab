@@ -1,16 +1,14 @@
-# Archived Status
-
-I have refactored [my original configuration](https://github.com/Master449/nixos-config) to use flakes and become more modular, though work still needs to be done. That means this homelab can be put together with modules in the main config repository.
-
 # NixOS Homelab
 
 ## Plans
 
 ToDo:
+- 3-2-1 Backup
+- Immich
+- Mealie
+- nfty
 - Gittea Server
 - Netdata
-- Nextcloud
-- File Browser
 
 Long-term
 - Active Directory
@@ -30,4 +28,5 @@ Done:
 - UPS NUT Monitoring
 - Minecraft Server
 - Bluemap Server
-- Transmission Web Client
+- qBittorrent + Proton
+- File Browser

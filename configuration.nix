@@ -40,6 +40,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  #services.xserver = {
+    #enable = true;
+    #layout = "us";
+    #displayManager.gdm.enable = true;
+    #desktopManager.gnome.enable = true;
+  #};
+
   users.users = {
     david = {
       isNormalUser = true;
