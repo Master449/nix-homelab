@@ -63,6 +63,7 @@
     ollama
     neovim
     ffmpeg-full
+    tmux
     jellyfin-ffmpeg
     htop
     git
