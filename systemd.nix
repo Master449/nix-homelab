@@ -26,7 +26,7 @@
     description = "Backs up the main drive to the backup with rsync, preserving permissions and only updating if needed.";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.rsync}/bin/rsync -aq /mnt/WD1/* /mnt/WD2/ --delete'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.rsync}/bin/rsync -aq /mnt/EX1/* /mnt/EX2/ --delete'";
     };
     restartIfChanged = false;
   };
@@ -47,7 +47,7 @@
     description = "Backs up docker containers to the backup with rsync, preserving permissions and only updating if needed.";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.rsync}/bin/rsync -aq /home/david/docker/* /mnt/WD1/docker-backup --delete'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.rsync}/bin/rsync -aq /home/david/docker/* /mnt/EX1/docker-backup --delete'";
     };
     restartIfChanged = false;
   };
@@ -69,7 +69,8 @@
         "0 0 * * *      root    /home/david/nix-homelab/scripts/daily-maintenance.sh"
         "0 2 * * 0      root    /home/david/nix-homelab/scripts/weekly-maintenance.sh"
         "0 5 1 * *      root    /home/david/nix-homelab/scripts/monthly-maintenance.sh"
-        "0 0 * * 0      root    /home/david/nix-homelab/scripts/automatic-backups.sh /mnt/WD1/syncthing/st-sync/syncthing/ /mnt/WD1/Media/Backups/syncthing-backups"
+        "0 0 * * 0      root    /home/david/nix-homelab/scripts/automatic-backups.sh /mnt/EX1/syncthing/st-sync/syncthing/ /mnt/EX1/Media/Backups/syncthing-backups"
+        "0 0 1 * *      root    /home/david/nix-homelab/scripts/automatic-backups.sh /home/david/docker/ /mnt/EX1/Media/Backups/docker-backups"
     ];
   };
 }

@@ -25,7 +25,7 @@
     time-machine = {
       isSystemUser = true;
       group = "time-machine";
-      home = "/mnt/WD1/time-machine";
+      home = "/mnt/EX1/time-machine";
     };
 
   };
@@ -53,24 +53,23 @@
       #  "vfs objects" = "catia fruit streams_xattr";
       #};
       media = {
-        path = "/mnt/WD1/Media";
-	"read only" = "no";
+        path = "/mnt/EX1/Media";
+        "read only" = "no";
         "guest ok" = "no";
         "create mask" = "0777";
         "directory mask" = "0777";
-	"valid users" = "jellyfin,@admin,@samba";
-	"writeable" = "yes";
+        "valid users" = "jellyfin,@admin,@samba";
+        "writeable" = "yes";
       };
       david = {
-        path = "/mnt/WD1/David";
-	"read only" = "no";
+        path = "/mnt/EX1/David";
+        "read only" = "no";
         "guest ok" = "no";
         "create mask" = "0777";
         "directory mask" = "0777";
-	"valid users" = "david,@admin,@samba";
-	"writeable" = "yes";
+        "valid users" = "david,@admin,@samba";
+        "writeable" = "yes";
       };
-      
     };
   };
 }

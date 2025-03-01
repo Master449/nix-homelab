@@ -160,6 +160,17 @@
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           '';
         };
+        "photos.flowers-datacenter.com" = {
+          locations."/".proxyPass = "http://192.168.1.109:2283";
+          useACMEHost = "flowers-datacenter.com";
+          forceSSL = true;
+          extraConfig = ''
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
+        };
         "homepage.home".locations."/".proxyPass = "http://192.168.1.109:3000";
         "jellyfin.home".locations."/".proxyPass = "http://192.168.1.109:8096";
         "uptime.home".locations."/".proxyPass = "http://192.168.1.109:7000";
