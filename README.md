@@ -8,7 +8,8 @@ ToDo:
 - Mealie
 - nfty
 - Gittea Server
-- Netdata
+- [Glance](https://github.com/glanceapp/glance)
+- [RomM](https://github.com/rommapp/romm)
 
 Long-term
 - Active Directory
